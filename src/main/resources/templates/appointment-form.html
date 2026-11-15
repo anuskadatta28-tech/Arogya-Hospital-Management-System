@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Form - Arogya Hospital</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Arogya Hospital</div>
+
+    <nav>
+        <a th:href="@{/}">Home</a>
+        <a th:href="@{/patients}">Patients</a>
+        <a th:href="@{/doctors}">Doctors</a>
+        <a th:href="@{/appointments}">Appointments</a>
+    </nav>
+</header>
+
+<div class="form-container">
+
+    <h1 th:text="${appointment.appointmentId == 0} ? 'Book Appointment' : 'Update Appointment'">
+        Book Appointment
+    </h1>
+
+    <form th:action="${appointment.appointmentId == 0} ? @{/appointments/save} : @{/appointments/update}"
+          method="post">
+
+        <!-- Appointment ID -->
+        <input type="hidden"
+               name="appointmentId"
+               th:value="${appointment.appointmentId}">
+
+        <!-- Patient Selection -->
+        <label>Select Patient</label>
+
+        <select name="patientId" required>
+            <option value="" disabled selected>Choose Patient</option>
+
+            <option th:each="patient : ${patients}"
+                    th:value="${patient.patientId}"
+                    th:text="${patient.name}">
+            </option>
+        </select>
+
+        <!-- Doctor Selection -->
+        <label>Select Doctor</label>
+
+        <select name="doctorId" required>
+            <option value="" disabled selected>Choose Doctor</option>
+
+            <option th:each="doctor : ${doctors}"
+                    th:value="${doctor.doctorId}"
+                    th:text="${doctor.name + ' - ' + doctor.specialization}">
+            </option>
+        </select>
+
+        <!-- Appointment Date -->
+        <label>Appointment Date</label>
+
+        <input type="date"
+               name="appointmentDate"
+               th:value="${appointment.appointmentDate}"
+               required>
+
+        <!-- Appointment Time -->
+        <label>Appointment Time</label>
+
+        <input type="time"
+               name="appointmentTime"
+               th:value="${appointment.appointmentTime}"
+               required>
+
+        <!-- Submit -->
+        <button type="submit" class="btn">
+            Save Appointment
+        </button>
+
+        <a th:href="@{/appointments}" class="btn secondary">
+            Cancel
+        </a>
+
+    </form>
+
+</div>
+
+</body>
+</html>

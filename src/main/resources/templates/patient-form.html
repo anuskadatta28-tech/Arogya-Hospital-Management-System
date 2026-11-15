@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Registration - Arogya Hospital</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>
+    <div class="logo">Arogya Hospital</div>
+    <nav>
+        <a th:href="@{/}">Home</a>
+        <a th:href="@{/patients}">Patients</a>
+        <a th:href="@{/doctors}">Doctors</a>
+        <a th:href="@{/appointments}">Appointments</a>
+    </nav>
+</header>
+
+<div class="form-container">
+    <h1 th:text="${patient.patientId == 0} ? 'Register New Patient' : 'Update Patient'">
+        Patient Form
+    </h1>
+
+    <form th:action="${patient.patientId == 0} ? @{/patients/save} : @{/patients/update}"
+          th:object="${patient}" method="post">
+
+        <input type="hidden" th:field="*{patientId}">
+
+        <label>Patient Name</label>
+        <input type="text" th:field="*{name}" placeholder="Enter full name" required>
+
+        <label>Age</label>
+        <input type="number" th:field="*{age}" min="1" max="120" placeholder="Enter age" required>
+
+        <label>Gender</label>
+        <select th:field="*{gender}" required>
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label>Phone Number</label>
+        <input type="tel" th:field="*{phone}" placeholder="Enter phone number" required>
+
+        <label>Email</label>
+        <input type="email" th:field="*{email}" placeholder="Enter email address" required>
+
+        <label>Address</label>
+        <textarea th:field="*{address}" placeholder="Enter complete address" required></textarea>
+
+        <button type="submit" class="btn">Save Patient</button>
+        <a th:href="@{/patients}" class="btn secondary">Cancel</a>
+    </form>
+</div>
+
+</body>
+</html>

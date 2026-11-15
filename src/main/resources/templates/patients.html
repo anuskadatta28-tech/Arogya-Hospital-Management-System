@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Records - Arogya Hospital</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>
+    <div class="logo">Arogya Hospital</div>
+    <nav>
+        <a th:href="@{/}">Home</a>
+        <a th:href="@{/patients}">Patients</a>
+        <a th:href="@{/doctors}">Doctors</a>
+        <a th:href="@{/appointments}">Appointments</a>
+    </nav>
+</header>
+
+<div class="table-container">
+
+    <h1>Patient Records</h1>
+
+    <a th:href="@{/patients/new}" class="btn">+ Register New Patient</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="patient : ${patients}">
+                <td th:text="${patient.patientId}"></td>
+                <td th:text="${patient.name}"></td>
+                <td th:text="${patient.age}"></td>
+                <td th:text="${patient.gender}"></td>
+                <td th:text="${patient.phone}"></td>
+                <td th:text="${patient.email}"></td>
+                <td th:text="${patient.address}"></td>
+
+                <td>
+                    <a th:href="@{/patients/edit/{id}(id=${patient.patientId})}">
+                        Edit
+                    </a>
+
+                    <form th:action="@{/patients/delete/{id}(id=${patient.patientId})}"
+                          method="post" style="display:inline;">
+                        <button type="submit"
+                                onclick="return confirm('Are you sure you want to delete this patient?')">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+
+            <tr th:if="${#lists.isEmpty(patients)}">
+                <td colspan="8">No patient records found.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <a th:href="@{/}" class="btn secondary">Back to Home</a>
+
+</div>
+
+</body>
+</html>

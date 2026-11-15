@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arogya Hospital</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Arogya Hospital</div>
+
+        <nav>
+            <a th:href="@{/}">Home</a>
+            <a th:href="@{/patients}">Patients</a>
+            <a th:href="@{/doctors}">Doctors</a>
+            <a th:href="@{/appointments}">Appointments</a>
+        </nav>
+    </header>
+
+    <main class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Arogya Hospital</h1>
+
+            <h2>Your Health, Our Priority</h2>
+
+            <p>
+                Providing quality healthcare with care, compassion
+                and commitment. Manage patient records, doctor
+                information and appointments in one place.
+            </p>
+
+            <div class="buttons">
+                <a th:href="@{/patients/new}" class="btn">
+                    Register Patient
+                </a>
+
+                <a th:href="@{/appointments/new}" class="btn secondary">
+                    Book Appointment
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <section class="services">
+        <h2>Hospital Management</h2>
+
+        <div class="service-container">
+
+            <div class="service-card">
+                <h3>Patient Records</h3>
+                <p>Register, view, update and manage patient information.</p>
+                <a th:href="@{/patients}">Manage Patients</a>
+            </div>
+
+            <div class="service-card">
+                <h3>Doctor Management</h3>
+                <p>Maintain doctor profiles and their availability.</p>
+                <a th:href="@{/doctors}">View Doctors</a>
+            </div>
+
+            <div class="service-card">
+                <h3>Appointments</h3>
+                <p>Book, modify and cancel patient appointments.</p>
+                <a th:href="@{/appointments}">Manage Appointments</a>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Arogya Hospital. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

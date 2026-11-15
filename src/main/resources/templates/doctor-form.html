@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Form - Arogya Hospital</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>
+    <div class="logo">Arogya Hospital</div>
+    <nav>
+        <a th:href="@{/}">Home</a>
+        <a th:href="@{/patients}">Patients</a>
+        <a th:href="@{/doctors}">Doctors</a>
+        <a th:href="@{/appointments}">Appointments</a>
+    </nav>
+</header>
+
+<div class="form-container">
+
+    <h1 th:text="${doctor.doctorId == 0} ? 'Register New Doctor' : 'Update Doctor'">
+        Doctor Form
+    </h1>
+
+    <form th:action="${doctor.doctorId == 0} ? @{/doctors/save} : @{/doctors/update}"
+          th:object="${doctor}" method="post">
+
+        <input type="hidden" th:field="*{doctorId}">
+
+        <label>Doctor Name</label>
+        <input type="text" th:field="*{name}"
+               placeholder="Enter doctor name" required>
+
+        <label>Specialization</label>
+        <input type="text" th:field="*{specialization}"
+               placeholder="e.g. Cardiologist" required>
+
+        <label>Phone Number</label>
+        <input type="tel" th:field="*{phone}"
+               placeholder="Enter phone number" required>
+
+        <label>Email</label>
+        <input type="email" th:field="*{email}"
+               placeholder="Enter email address" required>
+
+        <label>Available Days</label>
+        <input type="text" th:field="*{availableDays}"
+               placeholder="e.g. Monday, Wednesday, Friday" required>
+
+        <label>Available Time</label>
+        <input type="text" th:field="*{availableTime}"
+               placeholder="e.g. 10:00 AM - 2:00 PM" required>
+
+        <button type="submit" class="btn">Save Doctor</button>
+
+        <a th:href="@{/doctors}" class="btn secondary">Cancel</a>
+
+    </form>
+</div>
+
+</body>
+</html>
